@@ -1,0 +1,21 @@
+
+body {
+	color: rgb(87,75,0);
+}
+h2 {
+	font-size: 2rem;
+	line-height: 4rem!important;
+}
+p {
+	font-size: 1.6rem;
+	line-height: 2rem!important;
+}
+.list li {
+	font-size: 1.2rem;
+}
+.drop_down li {
+	font-size: 1.4rem;
+}
+#entry.list .titles h2 {
+	line-height: 4rem;
+}

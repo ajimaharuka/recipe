@@ -1,0 +1,24 @@
+extends layout
+
+block content
+	wrapper
+		header#header
+			.control
+				#toGrid.button.active
+					i
+					span 画像
+				#toList.button
+					i
+					span 詳細
+		section#maincontainer
+			section#maincontent
+				.recipeNum
+				.page
+					#title
+						h1
+							a(href="http://www.recipe.ajimaharuka.com/")
+								img(src="img/logo.png")
+					#entry.grid
+				.footer
+					p#copyright
+						small Copyright © 2013 Ajima Haruka All Rights Reserved.
