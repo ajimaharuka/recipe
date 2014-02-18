@@ -125,8 +125,6 @@ body
 
 #title
 	width 100%
-	top 0
-	left 0
 	text-align center
 	padding-top 20px
 	z-index 2000
@@ -197,8 +195,14 @@ body
 						transition opacity 150
 					.loading
 						opacity 1
-						background rgba(231,222,222,1) url("../img/loading.png") 50% 0 no-repeat
 						background-size cover
+						background rgba(231,222,222,1) url("../img/loading.png") 50% 0 no-repeat
+						&.1
+							background rgba(231,222,222,1) url("../img/loading.png") 50% 25% no-repeat
+						&.1.2
+							background rgba(231,222,222,1) url("../img/loading.png") 50% 50% no-repeat
+						&.1.2.3
+							background rgba(231,222,222,1) url("../img/loading.png") 50% 75% no-repeat
 				.titles
 				.meta
 					display none

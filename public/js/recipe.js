@@ -31,6 +31,8 @@
 					self.renderLoading();
 				}
 
+				self.loading();
+
 				$('.recipeNum').append($('<div><span>' + len + '</span> 品公開中</p>')).show();
 
 				var item = $('.list_item');
@@ -44,14 +46,32 @@
 
 		renderLoading : function() {
 
-			var el = $('<li class="list_item"><div class="loading"><div class="img_wrapper"></div></div></li>');
+			var el = $('<li class="list_item"><div class="dish"><div class="img_wrapper"><div class="loading"></div></div></div></li>');
 			$('#entry').append(el);
+
+		},
+
+		loading : function() {
+
+			var cnt = 0,
+				l = $('.loading');
+
+			function loop() {
+				cnt++;
+				l.addClass(cnt + '');
+
+				if (cnt > 3) {
+					l.removeClass('1 2 3 4');
+					cnt = 0;
+				}
+			}
+			setInterval(loop, 1000 / 60);
 
 		},
 
 		renderItem : function(item, data) {
 
-			$(item).find('.loading').remove();
+			$(item).find('.dish').remove();
 
 			var link = data.link || '',
 				img = data.imgUrl || 'http://59.157.7.186/wordpress/wp-content/uploads/r000.jpg',

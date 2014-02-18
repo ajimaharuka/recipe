@@ -147,8 +147,6 @@ body li {
 }
 #title {
   width: 100%;
-  top: 0;
-  left: 0;
   text-align: center;
   padding-top: 20px;
   z-index: 2000;
@@ -250,10 +248,19 @@ body li {
   opacity: 1;
   -ms-filter: none;
   filter: none;
-  background: #e7dede url("../img/loading.png") 50% 0 no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
+  background: #e7dede url("../img/loading.png") 50% 0 no-repeat;
+}
+#entry.grid .list_item .dish .img_wrapper .loading0.1 {
+  background: #e7dede url("../img/loading.png") 50% 25% no-repeat;
+}
+#entry.grid .list_item .dish .img_wrapper .loading0.10.2 {
+  background: #e7dede url("../img/loading.png") 50% 50% no-repeat;
+}
+#entry.grid .list_item .dish .img_wrapper .loading0.10.20.3 {
+  background: #e7dede url("../img/loading.png") 50% 75% no-repeat;
 }
 #entry.grid .list_item .dish .titles,
 #entry.grid .list_item .dish .meta {
