@@ -2,16 +2,26 @@ extends layout
 
 block content
 	wrapper
-		header#header
-			.control
-				#toGrid.button.active
-					i
-					span 画像
-				#toList.button
-					i
-					span 詳細
-		section#maincontainer
-			section#maincontent
+		div#header
+			header
+				//- .control
+				//- 	span#search
+				//- 		i
+				//- 	span#toCat.button
+				//- 		種類から検索
+				//- 	span#toIng.button
+				//- 		材料から検索
+				.control
+					span#toGrid.button.active
+						i
+						//- span 画像
+					span#toList.button
+						i
+						//- span 詳細
+		div#catContainer
+
+		div#mainContainer
+			section#mainContent
 				.recipeNum
 				.page
 					#title
