@@ -11,7 +11,9 @@
 
 			var self = this;
 
-			$('#entry').show();
+			this.$entry = $('#entry');
+
+			this.$entry.show();
 			$('#nav').show();
 
 			win.addEventListener('load', self.getData(), self.addEvt());
@@ -28,16 +30,19 @@
 					i;
 
 				for (i = 0; i < len; i++){
-					self.renderLoading();
+					this.$entry.append(self.renderLoading());
 				}
 
-				self.loading();
-
-				$('.recipeNum').append($('<div><span>' + len + '</span> 品公開中</p>')).show();
+				$('.recipeNum').append('<div><span>' + len + '</span> 品公開中</p>').show();
 
 				var item = $('.list_item');
 				for (i = 0; i < len; i++){
-					self.renderItem(item[i], json[i]);
+					$(item[i]).find('.dish').remove();
+					$(item[i]).html(self.renderItem(json[i]));
+
+					$(item[i]).find('.img_wrapper').imagesLoaded( function(){
+						this.find('img').animate({"opacity":1}, 1000);
+					})
 				}
 
 			});
@@ -46,32 +51,17 @@
 
 		renderLoading : function() {
 
-			var el = $('<li class="list_item"><div class="dish"><div class="img_wrapper"><div class="loading"></div></div></div></li>');
-			$('#entry').append(el);
+			return '<li class="list_item">' +
+						'<div class="dish">' +
+							'<div class="img_wrapper">' +
+								'<div class="loading"></div>' +
+							'</div>' +
+						'</div>' +
+					'</li>';
 
 		},
 
-		loading : function() {
-
-			var cnt = 0,
-				l = $('.loading');
-
-			function loop() {
-				cnt++;
-				l.addClass(cnt + '');
-
-				if (cnt > 3) {
-					l.removeClass('1 2 3 4');
-					cnt = 0;
-				}
-			}
-			setInterval(loop, 1000 / 60);
-
-		},
-
-		renderItem : function(item, data) {
-
-			$(item).find('.dish').remove();
+		renderItem : function(data) {
 
 			var link = data.link || '',
 				img = data.imgUrl || 'http://59.157.7.186/wordpress/wp-content/uploads/r000.jpg',
@@ -80,22 +70,23 @@
 				cat = data.categories || '',
 				ing = data.ingradients || '',
 				time = data.time || '',
-				el = '';
+				date = new Date().getTime();
 
 			cls = this.getMetaClass(cat, ing, time);
 			cat = this.renderMeta('category', cat);
 			ing = this.renderMeta('ingradient', ing);
 			if (time) time = '<div class="time"><p><i></i>' + time + '</p></div>';
 
-			el += '<a href="'+ link +'"><div class="dish">' +
-				'<div class="img_wrapper"><img src="'+ img + '"/></div>' +
-				'<div class="titles"><h2>' + title + '</h2>' +
-				'<p class="description">' + des + '</p></div>' +
-				'<div class="meta ' + cls + '">' + cat + ing + time
-				'</div>' +
-				'</div></a>';
-
-			$(item).html(el);
+			return  '<a href="'+ link +'">' +
+						'<div class="dish">' +
+							'<div class="img_wrapper"><img src="'+ img + "?=" + date + '"/></div>' +
+							'<div class="titles">' +
+								'<h2>' + title + '</h2>' +
+								'<p class="description">' + des + '</p>' +
+							'</div>' +
+							'<div class="meta ' + cls + '">' + cat + ing + time + '</div>' +
+						'</div>' +
+					'</a>';
 
 		},
 
@@ -142,16 +133,19 @@
 
 		addEvt : function () {
 
+			var self = this,
+				$btn = $('.button');
+
 			$('#toList').on('click',function(){
-				$('.button').removeClass('active');
+				$btn.removeClass('active');
 				$(this).addClass('active');
-				$('#entry').removeClass('grid').addClass('list');
+				self.$entry.removeClass('grid').addClass('list');
 			});
 
 			$('#toGrid').on('click',function(){
-				$('.button').removeClass('active');
+				$btn.removeClass('active');
 				$(this).addClass('active');
-				$('#entry').removeClass('list').addClass('grid');
+				self.$entry.removeClass('list').addClass('grid');
 			});
 
 		}
